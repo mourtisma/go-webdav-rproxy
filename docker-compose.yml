@@ -1,0 +1,17 @@
+version: '3'
+services:
+  webdav-apache:
+    build: ./webdav-server
+    ports:
+     - "8888:80"
+    environment:
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
+  proxy:
+    build: ./proxy
+    ports:
+     - "${PORT}:${PORT}"
+    environment:
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
+      - PORT=${PORT}

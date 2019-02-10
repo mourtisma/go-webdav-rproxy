@@ -9,9 +9,11 @@ import (
 	"strings"
 )
 
+// Forward sends the request to the Apache webdav server and
+// writes the response's headers and body back to the client
 func Forward(w http.ResponseWriter, r *http.Request) {
-	
-	// Instantiate the client 
+
+	// Instantiate the client
 	client := &http.Client{}
 
 	// Route the request to the webdav server in the webdav-apache container
@@ -28,7 +30,7 @@ func Forward(w http.ResponseWriter, r *http.Request) {
 		req.Header.Set(key, strings.Join(value, ","))
 	}
 
-	// Fire the reaquest
+	// Fire the request
 	resp, _ := client.Do(req)
 
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)

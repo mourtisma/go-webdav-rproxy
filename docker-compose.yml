@@ -5,6 +5,7 @@ services:
       context: ./webdav-server
       args:
         - SERVER_IMAGE=${SERVER_IMAGE}
+        - PORT=${PORT}
     ports:
      - "8888:80"
     environment:
@@ -17,6 +18,7 @@ services:
       context: ./proxy
       args:
         - PROXY_IMAGE=${PROXY_IMAGE}
+        - PORT=${PORT}
     ports:
      - "${PORT}:${PORT}"
     environment:

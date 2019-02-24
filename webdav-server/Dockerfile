@@ -23,6 +23,7 @@ RUN a2ensite webdav
 
 ADD run.sh /
 
+ARG PORT
 EXPOSE 80
 
 VOLUME /var/webdav

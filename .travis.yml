@@ -3,12 +3,8 @@ language: go
 services:
   - docker
 
-env:
-  - USERNAME=test
-  - PASSWORD=test
-  - PORT=7070
-
 before_install:
+  - cp .env.travis .env
   - docker-compose down
 
 script:

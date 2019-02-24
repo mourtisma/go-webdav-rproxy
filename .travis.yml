@@ -3,7 +3,7 @@ language: go
 services:
   - docker
 
-  env:
+env:
   - USERNAME=test
   - PASSWORD=test
   - PORT=7070

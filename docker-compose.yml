@@ -11,6 +11,7 @@ services:
       - SERVER_IMAGE=${SERVER_IMAGE}
       - USERNAME=${USERNAME}
       - PASSWORD=${PASSWORD}
+      - PORT=${PORT}
   proxy:
     build: 
       context: ./proxy

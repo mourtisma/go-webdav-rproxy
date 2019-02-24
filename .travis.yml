@@ -10,3 +10,4 @@ before_install:
 script:
   - docker-compose build
   - docker-compose up -d
+  - docker-compose exec proxy go test

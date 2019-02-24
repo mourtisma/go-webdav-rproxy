@@ -1,4 +1,5 @@
-FROM i386/golang:latest
+ARG PROXY_IMAGE
+FROM ${PROXY_IMAGE}
 
 RUN mkdir /app 
 ADD /src /app/ 

@@ -1,5 +1,5 @@
-
-FROM i386/ubuntu:latest
+ARG SERVER_IMAGE
+FROM ${SERVER_IMAGE}
 
 RUN apt-get update
 RUN apt-get install -y apache2 apache2-utils

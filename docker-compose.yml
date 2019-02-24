@@ -1,17 +1,25 @@
 version: '3'
 services:
   webdav-apache:
-    build: ./webdav-server
+    build:
+      context: ./webdav-server
+      args:
+        - SERVER_IMAGE=${SERVER_IMAGE}
     ports:
      - "8888:80"
     environment:
+      - SERVER_IMAGE=${SERVER_IMAGE}
       - USERNAME=${USERNAME}
       - PASSWORD=${PASSWORD}
   proxy:
-    build: ./proxy
+    build: 
+      context: ./proxy
+      args:
+        - PROXY_IMAGE=${PROXY_IMAGE}
     ports:
      - "${PORT}:${PORT}"
     environment:
+      - PROXY_IMAGE=${PROXY_IMAGE}
       - USERNAME=${USERNAME}
       - PASSWORD=${PASSWORD}
       - PORT=${PORT}

@@ -8,7 +8,7 @@ import (
 
 func TestForward(t *testing.T) {
 	// Create a GET fake request to pass to the handler
-	req, err := http.NewRequest("GET", "/path", nil)
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21,9 +21,9 @@ func TestForward(t *testing.T) {
 	handler.ServeHTTP(rr, req)
 
 	// Check the status code
-	if status := rr.Code; status != http.StatusNotFound {
+	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v",
-			status, http.StatusNotFound)
+			status, http.StatusOK)
 	}
 
 }

@@ -1,0 +1,16 @@
+language: go
+
+services:
+  - docker
+
+  env:
+  - USERNAME=test
+  - PASSWORD=test
+  - PORT=7070
+
+before_install:
+  - docker-compose down
+
+script:
+  - docker-compose build
+  - docker-compose up -d

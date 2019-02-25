@@ -35,11 +35,17 @@ func Forward(w http.ResponseWriter, r *http.Request) {
 
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
 
+	// Write the status code back
+	w.WriteHeader(resp.StatusCode)
+
 	// Write the headers and the response back to the client
 	for key, value := range resp.Header {
 		w.Header().Set(key, strings.Join(value, ","))
 	}
-	fmt.Fprintf(w, string(bodyBytes))
+
+	// Write the body back
+	w.Write(bodyBytes)
+
 }
 
 func main() {

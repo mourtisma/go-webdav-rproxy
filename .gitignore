@@ -1,1 +1,7 @@
 .env
+.vscode/
+/proxy/bin
+/proxy/pkg
+/proxy/src/github.com
+/proxy/src/golang.org
+/proxy/src/cloud.google.com

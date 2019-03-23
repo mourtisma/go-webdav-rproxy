@@ -1,6 +1,7 @@
 package main
 
 import (
+	"auth"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -50,5 +51,7 @@ func Forward(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", Forward)
+	http.HandleFunc("/auth/google/login", auth.OauthGoogleLogin)
+	http.HandleFunc("/auth/google/callback", auth.OauthGoogleCallback)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), nil))
 }

@@ -1,11 +1,13 @@
 ARG PROXY_IMAGE
 FROM ${PROXY_IMAGE}
 
-RUN mkdir /app 
-ADD /src /app/ 
-WORKDIR /app
+RUN mkdir -p /go/src 
+ADD /src /go/src 
+WORKDIR /go/src
 
-RUN go build
+RUN go get golang.org/x/oauth2/...
+
+RUN go build -o app
 
 ARG PORT
 EXPOSE ${PORT}

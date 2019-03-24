@@ -24,8 +24,10 @@ var googleOauthConfig = &oauth2.Config{
 
 const oauthGoogleUrlAPI = "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
 
+// OauthGoogleLogin generates a oauthStateCookie and redirects
+// the browser to a google auth page
 func OauthGoogleLogin(w http.ResponseWriter, r *http.Request) {
-    // Create oauthState cookie
+    
     oauthState := generateStateOauthCookie(w)
     u := googleOauthConfig.AuthCodeURL(oauthState)
     http.Redirect(w, r, u, http.StatusTemporaryRedirect)
@@ -44,6 +46,7 @@ func generateStateOauthCookie(w http.ResponseWriter) string {
     return state
 }
 
+// OauthGoogleCallback uses the value of the Cookie to get the logged user data
 func OauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
     // Read oauthState from Cookie
     oauthState, _ := r.Cookie("oauthstate")
@@ -61,14 +64,10 @@ func OauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    // GetOrCreate User in your db.
-    // Redirect or response with a token.
-    // More code .....
-    fmt.Fprintf(w, "UserInfo: %s\n", data)
+    fmt.Println(w, "UserInfo: %s\n", data)
 }
 
 func getUserDataFromGoogle(code string) ([]byte, error) {
-    // Use code to get token and get user info from Google.
 
     token, err := googleOauthConfig.Exchange(context.Background(), code)
     if err != nil {
@@ -81,7 +80,7 @@ func getUserDataFromGoogle(code string) ([]byte, error) {
     defer response.Body.Close()
     contents, err := ioutil.ReadAll(response.Body)
     if err != nil {
-        return nil, fmt.Errorf("failed read response: %s", err.Error())
+        return nil, fmt.Errorf("failed reading response: %s", err.Error())
     }
     return contents, nil
 }
